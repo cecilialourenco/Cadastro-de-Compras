@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+  <head>
+      <meta charset="UTF-8">
+      <title>Controle de Compras</title>
+      <link rel="stylesheet" type="text/css" href="css/reset.css">
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+			<div class="container">
+				<h1 class="titulo">Controle de Compras</h1>
+			</div>
+		</header>
+		<main>
+			<section class="container">
+				<h2>Meus produtos</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Data da Compra</th>
+							<th>Produto</th>
+							<th>Valor de compra</th>
+							<th>Data da venda</th>
+							<th>Valor de venda</th>
+						</tr>
+					</thead>
+					<tbody id="tabela-produtos">
+						<tr class="produto">
+							<td class="info-data-compra">11/09/2020</td>
+							<td class="info-produto">IPhone</td>
+							<td class="info-valor-compra">4300</td>
+							<td class="info-data-venda">11/02/2022</td>
+							<td class="info-valor-venda">2900</td>
+						</tr>
+
+						<tr class="produto">
+							<td class="info-data-compra">25/03/2021</td>
+							<td class="info-produto">IPad</td>
+							<td class="info-valor-compra">3000</td>
+							<td class="info-data-venda">11/02/2022</td>
+							<td class="info-valor-venda">2000</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</section>
+		</main>
+
+		<section class="container">
+			<h2 id="titulo-form">Adicionar novo produto</h2>
+			<ul id="mensagens-erro"></ul>
+			<form id="form-adiciona">
+					<div class="grupo">
+							<label for="dataCompra">Data da Compra:</label>
+							<input id="DataCompra" name="dataCompra" type="date" placeholder="informe a data da compra" class="campo">
+					</div>
+					<div class="grupo">
+							<label for="nome">Produto:</label>
+							<input id="nome" name="nome" type="text" placeholder="informe o nome do produto" class="campo campo-medio">
+					</div>
+					<div class="grupo">
+							<label for="valorCompra">Valor da compra:</label>
+							<input id="valorCompra" name="valorCompra" type="float" placeholder="informe o valor da compra" class="campo campo-medio">
+					</div>
+					<div class="grupo">
+							<label for="dataVenda">Data da venda:</label>
+							<input id="dataVenda" name="dataVenda" type="date" placeholder="informe a data da venda" class="campo campo-medio">
+					</div>
+          <div class="grupo">
+            <label for="valorVenda">Valor da venda:</label>
+            <input id="valorVenda" name="valorVenda" type="float" placeholder="informe o valor da venda" class="campo campo-medio">
+          </div>
+	
+					<button id="adicionar-produto" class="botao bto-principal">Adicionar</button>
+			</form>
+		</section>	
+
+		<script src="js/produto.js" ></script>
+
+	</body>
+</html>
