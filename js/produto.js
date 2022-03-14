@@ -4,30 +4,44 @@ botaoAdicionar.addEventListener("click", function(event) {
   event.preventDefault();
   let form = document.querySelector("#form-adiciona");
   let produto = obtemProdutoDoFormulario(form);
- 
-
   let erros = validaProduto(produto);
 
   if (erros.length > 0) {
     exibeMensagensDeErro(erros);
     return;
+  } else {
+    console.log(JSON.stringify(produto));
+    fetch("http://localhost:8000/product", {
+      method: "POST",
+      body: JSON.stringify(produto),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(produtoCriado => {
+      adicionarNaTabela(produtoCriado);
+    });
   }
-  let produtoTr = montaTr(produto);
+})
 
-  let tabela = document.querySelector("#tabela-produtos");
-  tabela.appendChild(produtoTr);
-  form.reset();
+  function adicionarNaTabela(produto) {
+    let produtoTr = montaTr(produto);
 
-  if (!validaProduto(produto)) {
-    console.log("Produto inválido");
-    return;
+    let tabela = document.querySelector("#tabela-produtos");
+    tabela.appendChild(produtoTr);
+    form.reset();
+  
+    if (!validaProduto(produto)) {
+      console.log("Produto inválido");
+      return;
+    }
   }
+ 
 
   function obtemProdutoDoFormulario(form) {
 
     let produto = {
-      nome: form.nome.value,
       dataCompra: form.dataCompra.value,
+      nome: form.nome.value,
       valorCompra: form.valorCompra.value,
       dataVenda: form.dataVenda.value,
       valorVenda: form.valorVenda.value,
@@ -97,4 +111,3 @@ botaoAdicionar.addEventListener("click", function(event) {
       ul.appendChild(li);
     });
   }
-});
