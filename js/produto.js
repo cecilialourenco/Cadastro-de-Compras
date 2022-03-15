@@ -17,25 +17,19 @@ botaoAdicionar.addEventListener("click", function(event) {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(produtoCriado => {
-      adicionarNaTabela(produtoCriado);
+    }).then(async resposta => {
+      adicionarNaTabela(await resposta.json());
     });
   }
 })
 
-  function adicionarNaTabela(produto) {
-    let produtoTr = montaTr(produto);
+  function adicionarNaTabela(dados) {
+    let produtoTr = montaTr(dados.produto);
 
     let tabela = document.querySelector("#tabela-produtos");
     tabela.appendChild(produtoTr);
     form.reset();
-  
-    if (!validaProduto(produto)) {
-      console.log("Produto inválido");
-      return;
-    }
   }
- 
 
   function obtemProdutoDoFormulario(form) {
 
@@ -50,7 +44,6 @@ botaoAdicionar.addEventListener("click", function(event) {
   }
 
   function validaProduto(produto) {
-
     var erros = [];
 
     if (produto.nome.length == 0) {
@@ -86,11 +79,6 @@ botaoAdicionar.addEventListener("click", function(event) {
     produtoTr.appendChild(montaTd(produto.valorVenda, "info-valor-venda"));
 
     return produtoTr;
-  }
-
-  function montaTd(_dado){
-    let td = document.createElement("td");
-    td.textContent
   }
 
   function montaTd(dado, classe) {
