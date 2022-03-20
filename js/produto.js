@@ -70,6 +70,7 @@ botaoAdicionar.addEventListener("click", function(event) {
   }
 
   function montaTr(produto) {
+    console.log(produto);
     let produtoTr = document.createElement("tr");
     produtoTr.classList.add("produto");
     produtoTr.appendChild(montaTd(formataData(produto.dataCompra), "info-data-compra"));
@@ -82,9 +83,9 @@ botaoAdicionar.addEventListener("click", function(event) {
   }
 
   function formataData(data) {
+    data = data.replace('Z', '');
     let dataParaFormatar = new Date(data);
-    let dataFormatada = ((dataParaFormatar.getDate() )) + "/" + ((dataParaFormatar.getMonth() + 1)) + "/" + dataParaFormatar.getFullYear();     // Formatar a data
-    // Colocar a data formatada na variável dataFormatada 
+    let dataFormatada = dataParaFormatar.toLocaleDateString();
     return dataFormatada;
   }
 
@@ -106,3 +107,18 @@ botaoAdicionar.addEventListener("click", function(event) {
       ul.appendChild(li);
     });
   }
+
+  function popularTabela() {
+    fetch("http://localhost:8000/product", {
+      method: "GET",
+    }).then(async resposta => {
+      produtos = await resposta.json();
+      produtos.forEach( function(produto) {
+        let produtoTr = montaTr(produto);
+        let tabela = document.querySelector("#tabela-produtos");
+        tabela.appendChild(produtoTr);
+      });
+    });
+  }
+
+  popularTabela();
