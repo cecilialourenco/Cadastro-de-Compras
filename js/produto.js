@@ -25,7 +25,7 @@ botaoAdicionar.addEventListener("click", function(event) {
 
   function adicionarNaTabela(dados) {
     let produtoTr = montaTr(dados.produto);
-
+    let form = document.querySelector("#form-adiciona");
     let tabela = document.querySelector("#tabela-produtos");
     tabela.appendChild(produtoTr);
     form.reset();
@@ -72,13 +72,20 @@ botaoAdicionar.addEventListener("click", function(event) {
   function montaTr(produto) {
     let produtoTr = document.createElement("tr");
     produtoTr.classList.add("produto");
-    produtoTr.appendChild(montaTd(produto.dataCompra, "info-data-compra"));
+    produtoTr.appendChild(montaTd(formataData(produto.dataCompra), "info-data-compra"));
     produtoTr.appendChild(montaTd(produto.nome, "info-produto"));
     produtoTr.appendChild(montaTd(produto.valorCompra, "info-valor-compra"));
-    produtoTr.appendChild(montaTd(produto.dataVenda, "info-data-venda"));
+    produtoTr.appendChild(montaTd(formataData(produto.dataVenda), "info-data-venda"));
     produtoTr.appendChild(montaTd(produto.valorVenda, "info-valor-venda"));
 
     return produtoTr;
+  }
+
+  function formataData(data) {
+    let dataParaFormatar = new Date(data);
+    let dataFormatada = ((dataParaFormatar.getDate() )) + "/" + ((dataParaFormatar.getMonth() + 1)) + "/" + dataParaFormatar.getFullYear();     // Formatar a data
+    // Colocar a data formatada na variável dataFormatada 
+    return dataFormatada;
   }
 
   function montaTd(dado, classe) {
