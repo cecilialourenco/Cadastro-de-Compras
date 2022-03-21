@@ -1,4 +1,5 @@
 let botaoAdicionar = document.querySelector("#adicionar-produto");
+let botoesDeletar = document.querySelector('button.deletar');
 
 botaoAdicionar.addEventListener("click", function(event) {
   event.preventDefault();
@@ -78,6 +79,7 @@ botaoAdicionar.addEventListener("click", function(event) {
     produtoTr.appendChild(montaTd(produto.valorCompra, "info-valor-compra"));
     produtoTr.appendChild(montaTd(formataData(produto.dataVenda), "info-data-venda"));
     produtoTr.appendChild(montaTd(produto.valorVenda, "info-valor-venda"));
+    produtoTr.appendChild(montaTdBotao('X', 'deletar', produto._id));
 
     return produtoTr;
   }
@@ -97,6 +99,21 @@ botaoAdicionar.addEventListener("click", function(event) {
     return td;
   }
 
+  function montaTdBotao(texto, classeBotao, idProduto) {
+    let botao = document.createElement('button');
+    botao.textContent = texto;
+    botao.value = idProduto;
+    botao.onclick = function() {
+      deletarProduto(botao.value)
+    };
+    botao.classList.add(classeBotao);
+
+    let td = document.createElement('td');
+    td.appendChild(botao);
+
+    return td;
+  }
+
   function exibeMensagensDeErro(erros) {
     let ul = document.querySelector("#mensagens-erro");
     ul.innerHTML = "";
@@ -105,6 +122,15 @@ botaoAdicionar.addEventListener("click", function(event) {
       var li = document.createElement("li");
       li.textContent = erro;
       ul.appendChild(li);
+    });
+  }
+
+  function deletarProduto(idProduto) {
+    console.log('clicou deletar', idProduto);
+    fetch(`http://localhost:8000/product/${idProduto}`, {
+      method: "DELETE",
+    }).then(async resposta => {  
+      location.reload();
     });
   }
 
