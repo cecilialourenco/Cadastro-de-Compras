@@ -96,7 +96,7 @@ label{
 	padding: 10px 0px;
 }
 
-button{
+/* button{
 	padding: .5em 2em;
 	border: 0;
 	border-bottom: 3px solid;
@@ -112,7 +112,7 @@ button{
     clear: both;
     margin: 10px 0px;
 
-}
+} */
 
 button:active{
 	margin-top:0px;

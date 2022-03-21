@@ -1,5 +1,6 @@
 let botaoAdicionar = document.querySelector("#adicionar-produto");
 let botoesDeletar = document.querySelector('button.deletar');
+let botaoNovoProduto = document.getElementById("novoProduto");
 
 botaoAdicionar.addEventListener("click", function(event) {
   event.preventDefault();
@@ -20,9 +21,14 @@ botaoAdicionar.addEventListener("click", function(event) {
       }
     }).then(async resposta => {
       adicionarNaTabela(await resposta.json());
+      document.getElementsByTagName("dialog")[0].close();
     });
   }
 })
+
+botaoNovoProduto.addEventListener('click', function(e) {
+  document.getElementsByTagName("dialog")[0].showModal();
+});
 
   function adicionarNaTabela(dados) {
     let produtoTr = montaTr(dados.produto);
